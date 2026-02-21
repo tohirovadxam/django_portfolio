@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About {{ fullname }}{% endblock %}
+
+{% block content %}
+<section class="relative min-h-screen bg-slate-900 overflow-hidden py-20 lg:py-28">
+    
+    <div class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="container mx-auto px-4 relative z-10 max-w-6xl">
+        
+        <div class="mb-16 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+                What's up <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Bro!</span>
+            </h1>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+            <div class="md:col-span-4 space-y-6">
+                <div class="group relative rounded-2xl overflow-hidden bg-slate-800 border border-white/5 shadow-2xl">
+                    <div class="aspect-[4/5] bg-slate-700 w-full relative overflow-hidden">
+                         <img src="{% static 'home/toji.png' %}"
+                              alt="{{ fullname|default:'Profile Image' }}"
+                              class="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105">
+
+                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80"></div>
+                         
+                         <div class="absolute bottom-0 left-0 p-6">
+                             <h2 class="text-2xl font-bold text-white">{{ fullname }}</h2>
+                             <span class="inline-block px-3 py-1 mt-2 text-xs font-semibold text-indigo-300 bg-indigo-500/10 rounded-full border border-indigo-500/20">
+                                 {{ profession }}
+                             </span>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-800/50 backdrop-blur-sm border border-white/5 p-6 shadow-xl">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">Details</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                            <span class="text-slate-500 text-sm">Age</span>
+                            <span class="text-white font-medium">{{ age }} years</span>
+                        </li>
+                        <li class="flex items-center justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                            <span class="text-slate-500 text-sm">Birthday</span>
+                            <span class="text-white font-medium">{{ date_of_birth }}</span>
+                        </li>
+                        <li class="flex items-center justify-between border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                            <span class="text-slate-500 text-sm">Email</span>
+                            <span class="text-indigo-400 font-medium text-sm truncate max-w-[150px]" title="{{ email }}">{{ email }}</span>
+                        </li>
+                        <li class="pt-2 flex justify-center gap-4">
+                            {% for social, link in socials.items %}
+                                <a href="{{ link }}" target="_blank" class="text-slate-400 hover:text-white transition-colors p-2 bg-white/5 rounded-lg hover:bg-white/10">
+                                    <span class="text-xs font-bold uppercase">{{ social }}</span>
+                                </a>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 space-y-6">
+                
+                <div class="rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 p-8 shadow-2xl text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <svg class="w-10 h-10 text-white/30 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H5.98295C4.87838 16 3.98295 16.8954 3.98295 18L3.98295 21H2.01705V18C1.98295 15.7909 3.77382 14 5.98295 14H12.017C14.2262 14 16.017 15.7909 16.017 18V21H14.017ZM9.01705 13C6.80791 13 5.01705 11.2091 5.01705 9C5.01705 6.79086 6.80791 5 9.01705 5C11.2262 5 13.017 6.79086 13.017 9C13.017 11.2091 11.2262 13 9.01705 13Z"></path></svg>
+                        <h3 class="text-2xl font-bold mb-2">Hello, I'm {{ firstname }}.</h3>
+                        <p class="text-indigo-100 text-lg leading-relaxed font-light">
+                            {{ short_bio }}
+                        </p>
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-800/50 backdrop-blur-sm border border-white/5 p-8 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        <span class="w-1 h-6 bg-indigo-500 rounded-full"></span>
+                        My Story
+                    </h3>
+                    <div class="text-slate-300 leading-relaxed space-y-4 whitespace-pre-line">
+                        {{ bio }}
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-800/50 backdrop-blur-sm border border-white/5 p-8 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <span class="w-1 h-6 bg-emerald-500 rounded-full"></span>
+                        Backend SKILLS
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        {% for lang in pr_lang.backend %}
+                            <div class="relative group">
+                                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
+                                <div class="relative px-4 py-2 bg-slate-900 rounded-lg border border-white/10 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                    <span class="text-slate-200 font-medium text-sm">{{ lang }}</span>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="text-slate-500 italic">No languages listed yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="rounded-2xl bg-slate-800/50 backdrop-blur-sm border border-white/5 p-8 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                        <span class="w-1 h-6 bg-emerald-500 rounded-full"></span>
+                        Frontend SKILLS
+                    </h3>
+
+                    <div class="flex flex-wrap gap-3">
+                        {% for lang in pr_lang.frontend %}
+                            <div class="relative group">
+                                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-200"></div>
+                                <div class="relative px-4 py-2 bg-slate-900 rounded-lg border border-white/10 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                    <span class="text-slate-200 font-medium text-sm">{{ lang }}</span>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="text-slate-500 italic">No languages listed yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

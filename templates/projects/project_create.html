@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Project{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-slate-900 py-12 px-4 flex justify-center items-center">
+
+    <div class="w-full max-w-2xl">
+        <div class="bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-8 sm:p-10">
+
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-white">
+                    {% if form.instance.slug %}Edit Project{% else %}New Project{% endif %}
+                </h2>
+                <p class="text-slate-400 mt-2">Fill in the details below to showcase your work.</p>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                {% for field in form %}
+                <div class="space-y-2">
+                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-slate-300">
+                        {{ field.label }}
+                    </label>
+
+                    <div class="relative">
+                        {% if field.name == 'image' or field.name == 'document' %}
+                            <input type="{{ field.field.widget.input_type }}"
+                                   name="{{ field.name }}"
+                                   id="{{ field.id_for_label }}"
+                                   class="block w-full text-sm text-slate-400
+                                          file:mr-4 file:py-2 file:px-4
+                                          file:rounded-full file:border-0
+                                          file:text-sm file:font-semibold
+                                          file:bg-indigo-600 file:text-white
+                                          file:cursor-pointer hover:file:bg-indigo-500
+                                          bg-slate-900 rounded-xl border border-slate-700 p-2">
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    </div>
+
+                    {% if field.errors %}
+                        <p class="text-red-400 text-xs mt-1">{{ field.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <div class="pt-6 flex gap-4">
+                    <button type="submit" class="flex-1 bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">
+                        {% if form.instance.slug %}Update Project{% else %}Create Project{% endif %}
+                    </button>
+                    <a href="{% url 'projects:project_list' %}" class="flex-none bg-slate-700 text-white font-medium py-3 px-6 rounded-xl hover:bg-slate-600 transition-colors">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

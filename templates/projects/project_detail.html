@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-12">
+
+    <a href="{% url 'projects:project_list' %}" class="text-slate-400 hover:text-cyan-400 transition mb-8 inline-flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Loyihalarga qaytish
+    </a>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <div class="relative group">
+            <div class="rounded-3xl overflow-hidden border border-slate-700 shadow-2xl aspect-video lg:aspect-square">
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                {% else %}
+                    <div class="w-full h-full bg-slate-800 flex items-center justify-center text-slate-500 italic">Rasm mavjud emas</div>
+                {% endif %}
+            </div>
+
+            <div class="absolute top-4 left-4">
+                <span class="px-4 py-2 bg-slate-900/80 backdrop-blur-md text-cyan-400 rounded-xl border border-cyan-500/30 text-xs font-bold uppercase tracking-widest shadow-lg">
+                    {{ project.language }}
+                </span>
+            </div>
+        </div>
+
+        <div class="flex flex-col">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-white mb-2 leading-tight">{{ project.title }}</h1>
+                    <span class="text-green-400 font-medium flex items-center gap-2">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        Status: {{ project.status }}
+                    </span>
+                </div>
+
+                {% if user.is_superuser %}
+                <div class="flex gap-2">
+                    <a href="{% url 'projects:project_update' project.slug %}" class="p-3 bg-amber-500/10 text-amber-500 rounded-2xl border border-amber-500/20 hover:bg-amber-500 hover:text-white transition shadow-lg" title="Tahrirlash">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </a>
+                    <a href="{% url 'projects:project_delete' project.slug %}" class="p-3 bg-rose-500/10 text-rose-500 rounded-2xl border border-rose-500/20 hover:bg-rose-500 hover:text-white transition shadow-lg" title="O'chirish">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="bg-slate-800/30 border border-slate-700/50 p-6 rounded-3xl mb-8 flex-grow">
+                <h3 class="text-slate-400 text-sm font-bold uppercase mb-3 tracking-widest">Loyiha haqida</h3>
+                <p class="text-slate-300 leading-relaxed text-lg">
+                    {{ project.description }}
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" class="flex items-center justify-center gap-3 px-8 py-4 bg-slate-800 text-white rounded-2xl hover:bg-slate-700 border border-slate-600 transition-all font-bold group">
+                    <svg class="w-6 h-6 group-hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub Repo
+                </a>
+                {% endif %}
+
+                {% if project.document %}
+                <a href="{{ project.document.url }}" download class="flex items-center justify-center gap-3 px-8 py-4 bg-cyan-600 text-white rounded-2xl hover:bg-cyan-500 transition-all font-bold shadow-xl shadow-cyan-900/20 group">
+                    <svg class="w-6 h-6 group-hover:bounce transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Source Code (.zip)
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto mt-16 border-t border-slate-800 pt-10 px-4 mb-16">
+
+    <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-2">
+        Comments
+        <span class="bg-indigo-600 text-white text-sm px-2 py-1 rounded-full">{{ comments.count }}</span>
+    </h3>
+
+    <div class="bg-slate-800/50 rounded-2xl p-6 mb-10 border border-slate-700">
+        <div class="flex items-start gap-4">
+            <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=6366f1&color=fff"
+                 alt="{{ user.username }}"
+                 class="w-10 h-10 rounded-full bg-slate-700">
+
+            <div class="flex-1">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.body }}
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-lg shadow-indigo-500/20">
+                            Post Comment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-y-6">
+        {% for comment in comments %}
+        <div class="flex gap-4 group">
+
+            <div class="flex-shrink-0">
+                <img src="https://ui-avatars.com/api/?name={{ comment.author.username }}&background=random&color=fff"
+                     alt="{{ comment.author.username }}"
+                     class="w-10 h-10 rounded-full border-2 border-slate-800">
+            </div>
+
+            <div class="flex-1">
+                <div class="rounded-2xl rounded-tl-none p-4 border transition-colors
+                    {% if comment.author == request.user %}
+                        bg-indigo-900/20 border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.1)]
+                    {% else %}
+                        bg-slate-800 border-slate-700/50 group-hover:border-slate-600
+                    {% endif %}">
+
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <h4 class="font-semibold text-sm
+                                {% if comment.author == request.user %} text-indigo-300 {% else %} text-white {% endif %}">
+                                {{ comment.author.username }}
+                            </h4>
+
+                            {% if comment.author == request.user %}
+                                <span class="text-[10px] bg-indigo-600 text-white px-1.5 py-0.5 rounded font-bold tracking-wider">SIZ</span>
+                            {% endif %}
+
+                            {% if comment.author.is_superuser %}
+                                <span class="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded border border-amber-500/30 font-bold tracking-wider">
+                                    ADMIN
+                                </span>
+                            {% endif %}
+
+                            <span class="text-xs text-slate-500 ml-2">{{ comment.created_at|timesince }} oldin</span>
+                        </div>
+
+                        {% if request.user == comment.author or request.user.is_superuser %}
+                            <form action="{% url 'projects:delete_comment' comment.pk %}" method="post" onsubmit="return confirm('Rostdan ham ushbu izohni o\'chirmoqchimisiz?');">
+                                {% csrf_token %}
+                                <button type="submit" class="text-slate-500 hover:text-red-500 transition-colors p-1 rounded hover:bg-red-500/10" title="Delete comment">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+
+                    <p class="text-sm leading-relaxed {% if comment.author == request.user %} text-indigo-100 {% else %} text-slate-300 {% endif %}">
+                        {{ comment.body|linebreaksbr }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-10">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-800 mb-3">
+                <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+            </div>
+            <p class="text-slate-500 text-sm">Hali hech kim izoh qoldirmagan. Birinchi bo'ling!</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
