@@ -11,23 +11,16 @@ class MyInfo:
 
 
     # Ko'p qatorli matn uchun
-    SHORT_BIO = """Men zamonaviy va yuqori samarali veb-ilovalarni yaratishga ishtiyoqmand Full-Stack Python Dasturchiman
-. Django va Tailwind CSS ekotizimida murakkab muammolarga kreativ va sodda yechimlar topishni yaxshi ko'raman. 
-Har bir yozgan kodimda nafaqat funksionallik, balki estetik go'zallik va foydalanuvchi qulayligini birinchi 
-o'ringa qo'yaman."""
+    SHORT_BIO = """I am an enthusiastic beginner Full-Stack Django Developer. I recently started my journey in programming, and I am dedicated to learning how to build modern, functional web applications every single day. My goal is to turn creative ideas into clean code and great user experiences."""
 
 
-    BIO = """Raqamli olamga kirib kelishim va falsafam: 
-    Mening dasturlash olamidagi sayohatim shunchaki kod yozishdan emas, balki g'oyalarni hayotga tatbiq etishga bo'lgan qiziqishdan boshlangan. Men uchun dasturlash — bu san'at va muhandislikning kesishgan nuqtasi. Har bir loyihada men faqat ishlaydigan kod emas, balki foydalanuvchi bilan 'muloqot' qiladigan, uning muammolarini hal etadigan raqamli tajriba yaratishga intilaman.
+    BIO = """Hi there! My name is Adxam. I have always had a strong interest in technology, but recently I decided to take a big step and start learning how to build it myself. Currently, I am focused on becoming a Full-Stack Django Developer.
 
-    Texnik mahorat va yondashuv:
-    Asosan Python va uning qudratli frameworki bo'lgan Django bilan ishlayman. Ma'lumotlar bazasi arxitekturasini (PostgreSQL/SQLite) loyihalashdan tortib, frontend qismida Tailwind CSS va JavaScript yordamida interaktiv interfeyslar yaratishgacha bo'lgan barcha bosqichlarni o'z zimmamga olaman. So'nggi paytlarda HTMX kabi zamonaviy texnologiyalarni o'rganish orqali loyihalarimning tezkorligini yangi bosqichga olib chiqyapman.
+To be honest, I really love the process of coding! There is something amazing about writing lines of text and seeing them turn into a working website on a computer or a smartphone. Every time I solve a complex problem or add a new feature to my projects, it gives me a great sense of happiness and motivation to learn more.
 
-    Nega men bilan ishlash kerak?
-    Men faqat berilgan vazifani bajarib qo'ymayman, balki loyihaning kelajakdagi o'sishi, xavfsizligi va optimallashuvi haqida qayg'uraman. Clean Code (Toza kod) printsiplari va DRY (Don't Repeat Yourself) qoidalariga amal qilish men uchun qat'iy talabdir. Shuningdek, yangi texnologiyalarni tez o'zlashtirish va jamoada samarali muloqot qilish qobiliyatim orqali har qanday qiyin vaziyatda ham sifatli natija ko'rsatishga tayyorman.
+I believe that technology is for everyone. If you are someone who enjoys using computers, exploring new apps, or understanding smartphones, I highly recommend that you try learning how to code too. It is a challenging but very rewarding path that opens up a whole new world of creative possibilities.
 
-    Maqsadlarim:
-    Hozirda men o'z mahoratimni yanada oshirish va katta hajmdagi, foydali loyihalarda ishtirok etishni maqsad qilganman. Agar sizga nafaqat dasturchi, balki loyihangizga o'z hissasini qo'shadigan hamkor kerak bo'lsa, men muloqotga doimo ochiqman!"""
+My current goal is to keep practicing, improve my technical skills, and build high-quality projects that can truly help people. I am excited about the future and look forward to growing as a developer in this ever-changing tech world."""
 
 
     # Skillarni oddiy ro'yxat (list) ko'rinishida saqlaymiz
