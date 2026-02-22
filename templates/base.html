@@ -32,23 +32,23 @@
                 </span>
             </a>
 
-            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+            <button onclick="toggleNavbar()" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
                 <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
 
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <div class="hidden w-full md:block md:w-auto transition-all duration-300" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-slate-800 md:bg-transparent">
 
                     <li><a href="/" class="block py-2 px-3 text-white hover:text-indigo-400 md:p-0 transition-colors">Home</a></li>
                     <li><a href="{% url 'about' %}" class="block py-2 px-3 text-gray-300 hover:text-indigo-400 md:p-0 transition-colors">About</a></li>
                     <li><a href="{% url 'projects:project_list' %}" class="block py-2 px-3 text-gray-300 hover:text-indigo-400 md:p-0 transition-colors">Projects</a></li>
 
-                    <li class="mt-4 md:mt-0 md:ml-6 flex items-center gap-4">
+                    <li class="mt-4 md:mt-0 md:ml-6 flex items-center gap-4 border-t border-gray-700 pt-4 md:border-0 md:pt-0">
                         {% if user.is_authenticated %}
-                            <form action="{% url 'logout' %}" method="post">
+                            <form action="{% url 'logout' %}" method="post" class="inline">
                                 {% csrf_token %}
                                 <button type="submit" class="group relative px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white">
                                     <span> Log Out</span>
@@ -61,7 +61,7 @@
                                 <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 transition-all group-hover:w-full"></span>
                             </a>
 
-                            <a href="{% url 'signup' %}" class="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+                            <a href="{% url 'signup' %}" class="relative inline-flex h-10 overflow-hidden rounded-full p-[1px] focus:outline-none">
                                 <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]"></span>
                                 <span class="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-6 py-1 text-sm font-medium text-white backdrop-blur-3xl transition-all hover:bg-slate-900">
                                     Sign Up
@@ -93,6 +93,25 @@
             <span class="block text-sm text-gray-500 sm:text-center">© {% now "Y" %} All Rights Reserved.</span>
         </div>
     </footer>
+
+<script>
+    function toggleNavbar() {
+        const navbar = document.getElementById('navbar-default');
+        const icon = document.getElementById('menu-icon');
+
+        // Menyuni ochish/yopish
+        navbar.classList.toggle('hidden');
+
+        // Ikonkani o'zgartirish (Ixtiyoriy: X belgisi va Hamburger orasida)
+        if (navbar.classList.contains('hidden')) {
+            // Hamburger ikonka
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>';
+        } else {
+            // "X" ikonka
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+        }
+    }
+</script>
 
 </body>
 </html>
