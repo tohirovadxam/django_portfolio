@@ -77,8 +77,9 @@
                         </a>
                         {% endif %}
                     </div>
-
-                    <a href="{% url 'projects:project_update' project.slug %}" class="text-xs font-medium text-indigo-400 hover:text-indigo-300">Edit Project</a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'projects:project_update' project.slug %}" class="text-xs font-medium text-indigo-400 hover:text-indigo-300">Edit Project</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
