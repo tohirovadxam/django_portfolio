@@ -85,7 +85,7 @@ def delete_comment(request, pk):
     # Izohni ID bo'yicha topamiz
     comment = get_object_or_404(Comment, pk=pk)
 
-    # Qayta yo'naltirish uchun loyiha slug'ini saqlab olamiz
+    # Qayta yo'naltirish uchun loyiha slugini saqlab olamiz
     project_slug = comment.project.slug
 
     # XAVFSIZLIK TEKSHIRUVI:
